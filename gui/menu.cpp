@@ -2,14 +2,8 @@
 #include "menu.hpp"
 #include "imgui/imgui.h"
 #include "tabs/about_tab.h"
-#include "tabs/doors_tab.h"
 #include "tabs/game_tab.h"
 #include "tabs/host_tab.h"
-#include "tabs/players_tab.h"
-#include "tabs/radar_tab.h"
-#include "tabs/replay_tab.h"
-#include "tabs/esp_tab.h"
-#include "tabs/sabotage_tab.h"
 #include "tabs/self_tab.h"
 #include "tabs/settings_tab.h"
 #include "tabs/tasks_tab.h"
@@ -24,13 +18,7 @@ namespace Menu {
 	static bool openSettings = false;
 	static bool openGame = false;
 	static bool openSelf = false;
-	static bool openRadar = false;
-	static bool openReplay = false;
-	static bool openEsp = false;
-	static bool openPlayers = false;
 	static bool openTasks = false;
-	static bool openSabotage = false;
-	static bool openDoors = false;
 	static bool openHost = false;
 #ifdef _DEBUG
 	static bool openDebug = false;
@@ -149,69 +137,12 @@ namespace Menu {
 			{"Resist Votekicks Against Self", "Anti-Exploit"}, {"Prevent Attempt to Crash Lobby", "Anti-Exploit"},
 			{"Text Editor", "Text Editor"}
 		}},
-		{"Radar", {
-			{"Show Radar", ""}, {"Show Dead Bodies", ""}, {"Show Ghosts", ""},
-			{"Right Click to Teleport", ""}, {"(Shift + Left Click) to Close Room Door", ""},
-			{"Hide Radar During Meetings", ""}, {"Draw Player Icons", ""}, {"Lock Radar Position", ""}, {"Show Border", ""},
-			{"Radar Color", ""}
-		}},
-		{"Replay", {
-			{"Show Replay", ""}, {"Show Only last Seconds", ""}, {"Clear After Meeting", ""},
-			{"Draw Player Icons", ""}, {"Replay Map Color", ""}
-		}},
-		{"ESP", {
-			{"Show ESP", ""}, {"Show Players", ""},
-			{"Show Ghosts", ""}, {"Show Dead Bodies", ""},
-			{"Show Tracer & Text Shadows", ""}, {"Tracer Thickness", ""}, {"Text Size", ""},
-			{"Hide During Meetings", ""}, {"Show Boxes", ""},
-			{"Show Tracers", ""}, {"Show Distances", ""},
-			{"Use Role Colors Instead of Player Colors", ""},
-			{"Show Crewmates", ""}, {"Show Impostors", ""},
-		}},
-		{"Players", {
-			{"Call Meeting", "Player"}, {"Skip Vote by All", "Player"},
-			{"Report Body", "Player"}, {"Spectate", "Player"},
-			{"Kill", "Player"}, {"Telekill", "Player"},
-			{"Kick", "Player"}, {"Votekick", "Player"},
-			{"Attempt to Ban", "Player"}, {"Ban", "Player"},
-			{"Blacklist", "Player"}, {"Whitelist", "Player"},
-			{"Shift", "Player"}, {"Protect", "Player"},
-			{"Vote Immunity", "Player"}, {"Teleport to Vent", "Player"}, {"Teleport to Random Vent", "Player"},
-			{"Force Climb Zipline", "Player"}, {"Spam Climb Zipline", "Player"},
-			{"Spam Teleport to Vent", "Player"}, {"Spam Teleport to Random Vents", "Player"},
-			{"Warn", "Player"},
-			{"Send Blank Chat As", "Trolling"}, {"Force Meeting By", "Trolling"},
-			{"Self-Report", "Trolling"}, {"Copy Outfit", "Trolling"},
-			{"Cosmetics Stealer", "Trolling"}, {"Cosmetics Resetter", "Trolling"},
-			{"Murder Loop", "Trolling"}, {"Shapeshift Player To", "Trolling"},
-			{"Unshift Player", "Trolling"}, {"Turn Player Into", "Trolling"},
-			{"Reset Player", "Trolling"}, {"Shift Everyone To", "Trolling"},
-			{"Unshift Everyone", "Trolling"}, {"Turn Everyone Into", "Trolling"},
-			{"Reset Everyone", "Trolling"}, {"Vote Off", "Trolling"},
-			{"Teleport To", "Trolling"}, {"Attach To", "Trolling"},
-			{"Turn into Ghost", "Trolling"}, {"Set Role", "Trolling"},
-			{"Force Color", "Trolling"}, {"Randomize Color", "Trolling"}, {"Cycle Color", "Trolling"},
-			{"Whisper To", "Trolling"}, {"Cycle Color", "Trolling"},
-			{"Steal Data", "Info"}, {"Copy PUID", "Info"},
-			{"Copy Friend Code", "Info"}, {"Report Player", "Info"},
-			{"TempBan", "Info"}, {"Roles", "Info"},
-		}},
 		{"Tasks", {
 			{"Drain Hide Timer", ""}, {"Complete All Tasks", ""},
 			{"Bypass Visual Tasks Being Off", ""}, {"Play Medbay Scan Animation", ""},
 			{"Play Shields Animation", ""}, {"Play Trash Animation", ""},
 			{"Play Weapons Animation", ""}, {"Fake Cameras In Use", ""},
 			{"Task Enforcer", ""}, {"Disable Tasks", ""}
-		}},
-		{"Sabotage", {
-			{"Disable Sabotages", ""}, {"Auto Repair Sabotages", ""}, {"Repair Sabotage", ""}, {"Sabotage All", ""},
-			{"Random Sabotage", ""}, {"Sabotage Lights", ""}, {"Sabotage Reactor", ""}, {"Sabotage Seismic Stabilizers", ""},
-			{"Sabotage Crash Course", ""}, {"Sabotage Oxygen", ""}, {"Activate Mushroom Mixup", ""},
-			{"Sabotage Comms", ""}, {"Disable Lights", ""}, {"Disable Lights [Auto Moving Switches]", ""},
-			{"Disable Fix Comms", ""}, {"Spam Sabotage Reactor", ""}, {"Spam Sabotage Oxygen", ""}, {"Infinite Mushroom Mixup", ""}
-		}},
-		{"Doors", {
-			{"Close All Doors", ""}, {"Close Room Door", ""}, {"Pin All Doors", ""}, {"Unpin All Doors", ""}, {"Auto Open Doors on Use", ""}
 		}},
 		{"Host", {
 			{"Choose Roles", "Utils"}, {"Disable Role Selection", "Utils"}, {"Randomize Roles", "Utils"}, {"Hide Roles List", "Utils"},
@@ -246,13 +177,7 @@ namespace Menu {
 		openSettings = openTab == Tabs::Settings;
 		openGame = openTab == Tabs::Game;
 		openSelf = openTab == Tabs::Self;
-		openRadar = openTab == Tabs::Radar;
-		openReplay = openTab == Tabs::Replay;
-		openEsp = openTab == Tabs::Esp;
-		openPlayers = openTab == Tabs::Players;
 		openTasks = openTab == Tabs::Tasks;
-		openSabotage = openTab == Tabs::Sabotage;
-		openDoors = openTab == Tabs::Doors;
 		openHost = openTab == Tabs::Host;
 #ifdef _DEBUG
 		openDebug = openTab == Tabs::Debug;
@@ -284,13 +209,7 @@ namespace Menu {
 		if (name == "Settings") return Tabs::Settings;
 		if (name == "Game") return Tabs::Game;
 		if (name == "Self") return Tabs::Self;
-		if (name == "Radar") return Tabs::Radar;
-		if (name == "Replay") return Tabs::Replay;
-		if (name == "ESP") return Tabs::Esp;
-		if (name == "Players") return Tabs::Players;
 		if (name == "Tasks") return Tabs::Tasks;
-		if (name == "Sabotage") return Tabs::Sabotage;
-		if (name == "Doors") return Tabs::Doors;
 		if (name == "Host") return Tabs::Host;
 #ifdef _DEBUG
 		if (name == "Debug") return Tabs::Debug;
@@ -299,18 +218,10 @@ namespace Menu {
 	}
 
 	bool IsTabUsable(Tabs tab) {
-		if (tab == Tabs::About || tab == Tabs::Settings || tab == Tabs::Game || tab == Tabs::Self ||
-			tab == Tabs::Radar || tab == Tabs::Replay || tab == Tabs::Esp) return true;
-
-		if ((IsInGame() || IsInLobby()) && tab == Tabs::Players) return true;
+		if (tab == Tabs::About || tab == Tabs::Settings || tab == Tabs::Game || tab == Tabs::Self) return true;
 
 		if (((IsInGame() && GetPlayerData(*Game::pLocalPlayer)->fields.Tasks != NULL) || (IsInLobby() && IsHost())) &&
 			tab == Tabs::Tasks) return true;
-
-		if ((IsInGame() && ShipStatus__TypeInfo->static_fields->Instance != NULL) &&
-			tab == Tabs::Sabotage) return true;
-
-		if ((IsInGame() && !State.mapDoors.empty()) && tab == Tabs::Doors) return true;
 
 		if (IsHost() && tab == Tabs::Host) return true;
 
@@ -326,7 +237,6 @@ namespace Menu {
 		if (tabName == "Settings") SettingsTab::OpenSubGroup(subGroup);
 		else if (tabName == "Game") GameTab::OpenSubGroup(subGroup);
 		else if (tabName == "Self") SelfTab::OpenSubGroup(subGroup);
-		else if (tabName == "Players") PlayersTab::OpenSubGroup(subGroup);
 		else if (tabName == "Host") HostTab::OpenSubGroup(subGroup);
 	}
 
@@ -417,26 +327,8 @@ namespace Menu {
 			if (ImGui::Selectable("Self", openSelf)) {
 				CloseAllOtherTabs(Tabs::Self);
 			}
-			if (ImGui::Selectable("Radar", openRadar)) {
-				CloseAllOtherTabs(Tabs::Radar);
-			}
-			if (ImGui::Selectable("Replay", openReplay)) {
-				CloseAllOtherTabs(Tabs::Replay);
-			}
-			if (ImGui::Selectable("ESP", openEsp)) {
-				CloseAllOtherTabs(Tabs::Esp);
-			}
-			if ((IsInGame() || IsInLobby()) && ImGui::Selectable("Players", openPlayers)) {
-				CloseAllOtherTabs(Tabs::Players);
-			}
 			if (((IsInGame() && GetPlayerData(*Game::pLocalPlayer)->fields.Tasks != NULL) || (IsInLobby() && IsHost())) && ImGui::Selectable("Tasks", openTasks)) {
 				CloseAllOtherTabs(Tabs::Tasks);
-			}
-			if (IsInGame() && ShipStatus__TypeInfo->static_fields->Instance != NULL && ImGui::Selectable("Sabotage", openSabotage)) {
-				CloseAllOtherTabs(Tabs::Sabotage);
-			}
-			if ((IsInGame() && !State.mapDoors.empty()) && ImGui::Selectable("Doors", openDoors)) {
-				CloseAllOtherTabs(Tabs::Doors);
 			}
 			if (IsHost() && ImGui::Selectable("Host", openHost)) {
 				CloseAllOtherTabs(Tabs::Host);
@@ -508,32 +400,8 @@ namespace Menu {
 			if (openSettings) SettingsTab::Render();
 			if (openGame) GameTab::Render();
 			if (openSelf) SelfTab::Render();
-			if (openRadar) RadarTab::Render();
-			if (openReplay) ReplayTab::Render();
-			if (openEsp) EspTab::Render();
-			if (openPlayers) {
-				if (IsInGame() || IsInLobby()) PlayersTab::Render();
-				else {
-					CloseAllOtherTabs(Tabs::Game);
-					GameTab::Render();
-				}
-			}
 			if (openTasks) {
 				if ((IsInGame() && GetPlayerData(*Game::pLocalPlayer)->fields.Tasks != NULL) || (IsInLobby() && IsHost())) TasksTab::Render();
-				else {
-					CloseAllOtherTabs(Tabs::Game);
-					GameTab::Render();
-				}
-			}
-			if (openSabotage) {
-				if (IsInGame()) SabotageTab::Render();
-				else {
-					CloseAllOtherTabs(Tabs::Game);
-					GameTab::Render();
-				}
-			}
-			if (openDoors) {
-				if (IsInGame() && !State.mapDoors.empty()) DoorsTab::Render();
 				else {
 					CloseAllOtherTabs(Tabs::Game);
 					GameTab::Render();

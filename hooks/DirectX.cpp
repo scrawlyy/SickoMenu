@@ -123,34 +123,13 @@ LRESULT __stdcall dWndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 
     if (shouldKeybindsActivate) {
         if (KeyBinds::IsKeyPressed(State.KeyBinds.Toggle_Menu)) State.ShowMenu = !State.ShowMenu;
-        if (KeyBinds::IsKeyPressed(State.KeyBinds.Toggle_Radar)) State.ShowRadar = !State.ShowRadar;
+        // Cheat keybinds removed (QoL build): Radar, Repair Sabotage, NoClip, Close All Doors, Zoom, Freecam, Close Room Door, Replay, Reset/Randomize Appearance disabled
         if (KeyBinds::IsKeyPressed(State.KeyBinds.Toggle_Console)) State.ShowConsole = !State.ShowConsole;
-        if (KeyBinds::IsKeyPressed(State.KeyBinds.Repair_Sabotage) && IsInGame()) RepairSabotage(*Game::pLocalPlayer);
-        if (KeyBinds::IsKeyPressed(State.KeyBinds.Toggle_Noclip) && (IsInGame() || IsInLobby())) { State.NoClip = !State.NoClip; State.HotkeyNoClip = true; }
-        /*if (KeyBinds::IsKeyPressed(State.KeyBinds.Toggle_Autokill) && (IsInGame() || IsInLobby())) State.AutoKill = !State.AutoKill;*/
-        if (KeyBinds::IsKeyPressed(State.KeyBinds.Close_All_Doors) && IsInGame()) State.CloseAllDoors = true;
-        if (KeyBinds::IsKeyPressed(State.KeyBinds.Toggle_Zoom) && (IsInGame() || IsInLobby())) {
-            State.EnableZoom = !State.EnableZoom;
-            if (!State.EnableZoom && Game::HudManager.IsInstanceExists()) {
-                auto hud = Game::HudManager.GetInstance();
-                bool isKillOverlayActive = hud->fields.KillOverlay != NULL &&
-                    KillOverlay_get_IsOpen((KillOverlay*)hud->fields.KillOverlay, NULL);
-                if (isKillOverlayActive) State.EnableZoom = true;
-                // the ProgressTracker disappears if you disable zoom during the kill animation
-            }
-            State.HasRefreshedUI = false;
-        }
-        if (KeyBinds::IsKeyPressed(State.KeyBinds.Toggle_Freecam) && (IsInGame() || IsInLobby())) {
-            State.FreeCam = !State.FreeCam;
-            State.playerToFollow = {};
-        }
-        if (KeyBinds::IsKeyPressed(State.KeyBinds.Close_Current_Room_Door) && IsInGame()) State.rpcQueue.push(new RpcCloseDoorsOfType(GetSystemTypes(GetTrueAdjustedPosition(*Game::pLocalPlayer)), false));
-        if (KeyBinds::IsKeyPressed(State.KeyBinds.Toggle_Replay)) State.ShowReplay = !State.ShowReplay;
+        // Cheat keybinds removed (QoL build): Zoom, Freecam, Close Room Door, Replay, Reset/Randomize Appearance disabled
         if (KeyBinds::IsKeyPressed(State.KeyBinds.Toggle_ChatAlwaysActive) && (IsInGame() || IsInLobby())) State.ChatAlwaysActive = !State.ChatAlwaysActive;
         if (KeyBinds::IsKeyPressed(State.KeyBinds.Toggle_ReadGhostMessages) && (IsInGame() || IsInLobby())) State.ReadGhostMessages = !State.ReadGhostMessages;
         if (KeyBinds::IsKeyPressed(State.KeyBinds.Toggle_Hud) && IsInGame()) State.DisableHud = !State.DisableHud;
-        if (KeyBinds::IsKeyPressed(State.KeyBinds.Reset_Appearance) && (IsInGame() || IsInLobby())) ControlAppearance(false);
-        if (KeyBinds::IsKeyPressed(State.KeyBinds.Randomize_Appearance)) ControlAppearance(true);
+        // Cheat keybinds removed (QoL build): Reset/Randomize Appearance disabled
         if (KeyBinds::IsKeyPressed(State.KeyBinds.Complete_Tasks) && IsInGame()) CompleteAllTasks();
         if (KeyBinds::IsKeyPressed(State.KeyBinds.Leave_Game) && (IsInGame() || IsInLobby()))
             app::AmongUsClient_ExitGame((*Game::pAmongUsClient), DisconnectReasons__Enum::ExitGame, NULL);

@@ -495,7 +495,7 @@ void dModManager_LateUpdate(ModManager* __this, MethodInfo* method) {
     if (field == nullptr) return;
     auto modStampSprite = (SpriteRenderer*)il2cpp_field_get_value_object(field, (Il2CppObject*)__this);
 
-    bool shouldShowModStamp = !State.PanicMode && !State.DisableHud && !State.HideModStamp;
+    bool shouldShowModStamp = false; // Stealth QoL build: never show mod stamp (old: !State.PanicMode && !State.DisableHud && !State.HideModStamp)
     SpriteRenderer_set_color(modStampSprite, Color(1.f, 1.f, 1.f, shouldShowModStamp ? 0.498f : 0.f), NULL);
 }
 

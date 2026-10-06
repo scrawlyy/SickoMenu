@@ -183,7 +183,8 @@ void dInnerNetClient_Update(InnerNetClient* __this, MethodInfo* method) {
                 }*/ //unintentionally prevents admin from working, workaround can be found later
             }
 
-            if (!State.PanicMode && State.ModDetection && (IsInLobby()/* || State.BroadcastedMod == 1*/)) {
+            // Stealth QoL build: never broadcast mod usage (old code sent RPC 420 with SickoVersion, detectable by other mods/SMAC). Disabled.
+            if (false && !State.PanicMode && State.ModDetection && (IsInLobby())) {
                 uint8_t rpcCall = (uint8_t)420;
                 /*switch (State.BroadcastedMod) {
                 case 1:

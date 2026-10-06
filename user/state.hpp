@@ -359,8 +359,8 @@ public:
     bool AutoKill = false;
     bool FakeAlive = false;
     bool ShowHost = false;
-    bool HideWatermark = false;
-    bool HideModStamp = false;
+    bool HideWatermark = true;
+    bool HideModStamp = true;
     bool ShowVoteKicks = false;
     bool ShowFps = false;
     bool DoTasksAsImpostor = false;
@@ -679,7 +679,7 @@ public:
     bool PanicWarning = true;
     bool TempPanicMode = false; //prevent instant crash on joining lobby
     bool BlinkPlayersTab = false; //prevent instant crash on player leaving
-    bool ModDetection = true;
+    bool ModDetection = false;
     int BroadcastedMod = 0;
     bool ForceLoginAsGuest = false;
     bool DisableHostAnticheat = false;

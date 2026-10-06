@@ -332,8 +332,7 @@ void dPlayerControl_FixedUpdate(PlayerControl* __this, MethodInfo* method) {
                         userMod += " " + State.modUsers.at(__this->fields.PlayerId)[1];
                     }
                 }
-                if (__this == *Game::pLocalPlayer && userMod.empty() && State.ModDetection)
-                    userMod = "<#ff006c>SickoMenu</color> " + sickoVersionText;
+                // Stealth QoL build: never tag ourselves as SickoMenu user (old code appended "[SickoMenu User]" to local name display).
 
                 std::string modUsage = !userMod.empty() ?
                     std::format(" {}[{} User]</color>", getHexCodeFromImVec4(State.ModUsageColor),

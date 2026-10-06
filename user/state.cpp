@@ -722,6 +722,108 @@ void Settings::Load() {
         Log.Info("Unable to load " + std::format("sicko-config/{}.json", this->selectedConfig));
     }
 
+    // QoL build: force-disable removed cheat flags even if an old config enables them.
+    // Allowed to stay on: GodMode (Unkillable), NoLadderZiplineCooldown, DoTasksAsImpostor, task/QoL/anticheat/host-moderation flags.
+    this->MaxVision = false;
+    this->Wallhack = false;
+    this->FreeCam = false;
+    this->EnableZoom = false;
+    this->NoClip = false;
+    this->HotkeyNoClip = false;
+    this->UnlockVents = false;
+    this->MoveInVentAndShapeshift = false;
+    this->AlwaysMove = false;
+    this->RolesBypassCommsSabotage = false;
+    this->KillImmunity = false;
+    this->FakeAlive = false;
+    this->UnlockKillButton = false;
+    this->KillInVanish = false;
+    this->BypassAngelProt = false;
+    this->InfiniteKillRange = false;
+    this->KillInLobbies = false;
+    this->AutoKill = false;
+    this->MultiplySpeed = false;
+    this->ModifyKillDistance = false;
+    this->DisableVents = false;
+    this->SpamReport = false;
+    this->SpamVentTpEveryone = false;
+    this->SpamVentTpEveryoneRandom = false;
+    this->SpamZiplineEveryone = false;
+    this->TeleportEveryone = false;
+    this->RotateEveryone = false;
+    this->InfiniteMeetings = false;
+    this->Engineer_NoVentCooldown = false;
+    this->Engineer_InfiniteVentTime = false;
+    this->Scientist_NoVitalsCooldown = false;
+    this->Scientist_InfiniteBattery = false;
+    this->Tracker_NoTrackingCooldown = false;
+    this->Tracker_InfiniteTracking = false;
+    this->Detective_NoInterrogateCooldown = false;
+    this->Judge_NoTaskRequirement = false;
+    this->Judge_InfiniteOverrules = false;
+    this->GuardianAngel_NoProtectCooldown = false;
+    this->Influencer_NoRefreshCooldown = false;
+    this->Impostor_NoKillCooldown = false;
+    this->Shapeshifter_InfiniteShapeshiftDuration = false;
+    this->AnimationlessShapeshift = false;
+    this->KillImpostors = false;
+    this->Cycler = false;
+    this->CycleForEveryone = false;
+    this->confuser = false;
+    this->confuseOnJoin = false;
+    this->confuseOnStart = false;
+    this->confuseOnKill = false;
+    this->confuseOnVent = false;
+    this->confuseOnMeeting = false;
+    this->CustomNameForEveryone = false;
+    this->ForceNameForEveryone = false;
+    this->ForceColorForEveryone = false;
+    this->ServerSideCustomName = false;
+    this->RevealRoles = false;
+    this->ShowGhosts = false;
+    this->ShowPhantoms = false;
+    this->ShowPlayersInVents = false;
+    this->AutoFakeRole = false;
+    this->DisableLights = false;
+    this->DisableLightSwitches = false;
+    this->DisableComms = false;
+    this->DisableReactor = false;
+    this->DisableOxygen = false;
+    this->InfiniteMushroomMixup = false;
+    this->SpamDoors = false;
+    this->CloseAllDoors = false;
+    this->ChatSpam = false;
+    this->CrashChatSpam = false;
+    this->ChatSpamEveryone = false;
+    this->BanEveryone = false;
+    this->KickEveryone = false;
+    this->KickAFK = false;
+    this->BanLeavers = false;
+    this->ShowRadar = false;
+    this->ShowEsp = false;
+    this->ShowReplay = false;
+    this->SpoofLevel = false;
+    this->SpoofPlatform = false;
+    this->SpoofPsnId = false;
+    this->SpoofXboxId = false;
+    this->SpoofPlName = false;
+    this->SpoofGuestAccount = false;
+    this->SpoofFriendCode = false;
+    this->UseCustomServer = false;
+    this->ForceDTLS = false;
+    this->DisableHostAnticheat = false;
+    this->LevelFarm = false;
+    this->murderLoop = false;
+    this->suicideLoop = false;
+    this->farmLoop = false;
+    // Stealth: never expose mod usage via RPC/stamp/watermark/chat/version.
+    this->ModDetection = false;
+    this->HideWatermark = true;
+    this->HideModStamp = true;
+    this->ReadAndSendSickoChat = false;
+    this->SpoofAUVersion = false;
+    this->DisableHostAnticheat = false;
+
     //Do not do any IL2CPP stuff here!  The constructors of most classes have not run yet!
 }
 

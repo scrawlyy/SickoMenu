@@ -604,21 +604,9 @@ namespace HostTab {
                     }
                 }*/
 
-                if (ToggleButton("Unlock Kill Button", &State.UnlockKillButton)) {
-                    State.Save();
-                }
-
-                if (ToggleButton("Kill While Vanished", &State.KillInVanish)) {
-                    State.Save();
-                }
-
                 /*if (ToggleButton("Disable Medbay Scan", &State.DisableMedbayScan)) {
                     State.Save();
                 }*/
-
-                if (ToggleButton("Bypass Guardian Angel Protections", &State.BypassAngelProt)) {
-                    State.Save();
-                }
 
                 /*if (IsInLobby()) {
                     static int banMinutes = 240;
@@ -632,39 +620,6 @@ namespace HostTab {
                         banMinutes = std::clamp((int)(banMinutes / 5) * 5, 5, 1380);
                     }
                 }*/
-
-                int maxPackedRpcs = 10 + GameOptions().GetInt(Int32OptionNames__Enum::MaxPlayers) * 2;
-
-#define LocalInGame (((*Game::pAmongUsClient)->fields._.NetworkMode == NetworkModes__Enum::LocalGame) && ((*Game::pAmongUsClient)->fields._.GameState == InnerNetClient_GameStates__Enum::Started))
-                if (GetAllPlayerControl().size() == 1 && IsInMultiplayerGame() && !LocalInGame) { \
-                    if (!State.farmLoop && AnimatedButton(std::format("Level Farm ({} Kills)", 5000 * maxPackedRpcs).c_str())) {
-                        State.rpcQueue.push(new RpcSetRole(*Game::pLocalPlayer, RoleTypes__Enum::ImpostorGhost));
-                        State.farmCount = 5000; //controls how many times the player is to be murdered
-                        State.farmLoop = true;
-                    }
-                    if (State.farmLoop && AnimatedButton("Stop Level Farm")) {
-                        State.farmLoop = false;
-                        State.farmCount = 0;
-                        /*State.rpcQueue.push(new RpcSetRole(*Game::pLocalPlayer, RoleTypes__Enum::Impostor));
-                        State.rpcQueue.push(new SetRole(RoleTypes__Enum::Impostor));
-                        State.rpcQueue.push(new RpcEndGame(GameOverReason__Enum::ImpostorsByKill));*/
-                    }
-                    if (State.farmLoop) {
-                        ImGui::SameLine();
-                        ImGui::Text("(%d Kills)", (5000 - State.farmCount) * maxPackedRpcs);
-                    }
-                    else {
-                        ImGui::SameLine();
-                        if (AnimatedButton("Set Impostor Role")) {
-                            State.rpcQueue.push(new RpcSetRole(*Game::pLocalPlayer, RoleTypes__Enum::Impostor));
-                            State.rpcQueue.push(new SetRole(RoleTypes__Enum::Impostor));
-                        }
-                        ImGui::SameLine();
-                        if (AnimatedButton("End Game (Impostor Win)")) {
-                            State.rpcQueue.push(new RpcEndGame(GameOverReason__Enum::ImpostorsByKill));
-                        }
-                    }
-                }
 
                 ImGui::EndChild();
             }
